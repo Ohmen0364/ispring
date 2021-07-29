@@ -23,7 +23,7 @@ case $input in
         docker-compose ps
         ;;
     5) 
-        docker exec mysql /usr/bin/mysqldump -u root --password=toor teamcity_db > /var/lib/mysql/BackUp-$(date +%m-%d-%Y).sql
+        docker exec mysql /usr/bin/mysqldump -u root --password=toor teamcity_db > ./backup-databse-$(date +%m-%d-%Y).sql
         ;;
     q)
         echo "Exit script..."
