@@ -1,12 +1,10 @@
 #!/bin/bash
-sudo apt update
-sudo apt install apt-transport-https ca-certificates curl gnupg2 software-properties-common vim -y
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-echo \
-  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt update
-sudo apt install docker-compose -y
+sudo wget https://github.com/moparisthebest/static-curl/releases/download/v7.78.0/curl-amd64 -O /usr/bin/curl
+sudo chmod +x /usr/bin/curl
+sudo curl -fsSL https://get.docker.com/ | sudo sh
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 sudo systemctl disable apache2
 sudo usermod -aG docker $USER
 sudo mkdir tc-logs tc-data mysql
