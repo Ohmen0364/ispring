@@ -5,6 +5,7 @@ echo "2 - Start Project"
 echo "3 - Stop  Project"
 echo "4 - Status containers"
 echo "5 - Back Up DataBase"
+echo "6 - Back Up TeacmCity"
 echo "Enter q for exit"
 echo -n "Enter number: "
 read input
@@ -24,6 +25,9 @@ case $input in
         ;;
     5) 
         docker exec mysql /usr/bin/mysqldump -u root --password=toor teamcity_db > ./backup-databse-$(date +%m-%d-%Y).sql
+        ;;
+    6)
+        docker exec mysql /opt/teamcity/bin/maintainDB.sh backup --all -M -F teamcity-backup
         ;;
     q)
         echo "Exit script..."
