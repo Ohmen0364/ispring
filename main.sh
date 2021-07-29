@@ -24,7 +24,7 @@ case $input in
         docker-compose ps
         ;;
     5) 
-        docker exec mysql /usr/bin/mysqldump -u root --password=toor teamcity_db > ./backup-databse-$(date +%m-%d-%Y).sql
+        docker exec mysql /usr/bin/mysqldump -u root --password=toor teamcity_db > ./backup-databse-$(date +%m-%d-%Y-%H-%M).sql
         ;;
     6)
         docker exec teamcity /opt/teamcity/bin/maintainDB.sh backup --all -M -F teamcity-backup
