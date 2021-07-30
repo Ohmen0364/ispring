@@ -48,7 +48,7 @@ case $input in
         if [[ -z "$sqlfile" ]]; then
             echo "[File name is empty!]"
         elif [[ -f "$sqlfile" ]]; then
-        cat $sqlfile | docker exec -i mysql /usr/bin/mysql -u root --password=toor teamcity_db; echo -e "\e[32mDone.\e[0m"
+        cat $sqlfile | docker exec -i mysql /usr/bin/mysql -u root --password=toor teamcity_db; docker-compose restart teamcity;echo -e "\e[32mDone.\e[0m"
         else
         echo -n "File not found!"
         fi
@@ -69,10 +69,12 @@ case $input in
         if [[ -z "$zipfile" ]]; then
             echo "[File name is empty!]"
         elif [[ -f "tc-data/backup/$zipfile" ]]; then
+            docker exec mysql /usr/bin/mysqldump -u root --password=toor teamcity_db > ./temp.sql
             docker exec mysql mysql -u root --password=toor teamcity_db -e "drop database teamcity_db;"
             docker exec mysql mysql -u root --password=toor -e "create database teamcity_db;"
             rm -rf /data/teamcity_server/datadir/config/*; rm -rf /data/teamcity_server/datadir/system/*;
             docker exec teamcity /opt/teamcity/bin/maintainDB.sh restore --all -F /data/teamcity_server/datadir/backup/$zipfile; echo -e "\e[32mDone.\e[0m"
+            cat temp.sql | docker exec -i mysql /usr/bin/mysql -u root --password=toor teamcity_db; docker-compose restart teamcity; rm -rf temp.sql; echo -e "\e[32mDone.\e[0m"
         else
         echo -n "File not found!"
         fi
