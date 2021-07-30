@@ -40,3 +40,6 @@
   ![image](https://user-images.githubusercontent.com/88158708/127622942-918406d6-ffe5-4cc5-b18c-127912ecb901.png)
   
 После инициализации сервера teamcity ознакамливаемся с лицензионным соглашением, принемаем условия продукта и создаем админ пользователя.
+
+![image](https://user-images.githubusercontent.com/88158708/127624004-93f72459-854e-44e5-869d-62e172fe6a03.png)
+
