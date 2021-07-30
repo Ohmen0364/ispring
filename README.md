@@ -54,6 +54,6 @@
 * Шестой пункт выполняет бэкап данных TeamCity и сохраняет его в директории *.ispring/tc-data/backup/teamcity-backup-(date-time)*
 
 
-##TO DO
+## TO DO
 * Восстановление данных БД из бэкапа
 * Восстановление данных TeamCity из бэкап
