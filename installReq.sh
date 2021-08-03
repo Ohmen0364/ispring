@@ -9,5 +9,5 @@ sudo systemctl disable apache2
 sudo usermod -aG docker $USER
 sudo mkdir ./data/tc/tc-logs ./data/tc/mysql
 sudo chown -R $USER:docker ./*
-sudo cp hosts /etc/hosts
+sudo cp ./config/hosts /etc/hosts
 sudo reboot
