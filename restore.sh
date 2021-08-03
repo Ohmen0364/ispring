@@ -32,7 +32,7 @@ case $input in
         echo " "
         echo " --- backup list --- "
         echo " "
-        ls tc-data/backup/ | grep \\.zip
+        ls ./data/tc/tc-data/backup/ | grep \\.zip
         echo " "
         echo " ------------------ "
         echo " "
@@ -43,7 +43,7 @@ case $input in
         read zipfile
         if [[ -z "$zipfile" ]]; then
             echo "[File name is empty!]"
-        elif [[ -f "tc-data/backup/$zipfile" ]]; then
+        elif [[ -f "./data/tc/tc-data/backup/$zipfile" ]]; then
             docker exec mysql /usr/bin/mysqldump -u root --password=toor teamcity_db > ./temp.sql
             docker exec mysql mysql -u root --password=toor teamcity_db -e "drop database teamcity_db;"
             docker exec mysql mysql -u root --password=toor -e "create database teamcity_db;"
