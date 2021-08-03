@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   db:
-    image: mysql
+    image: mysql:8.0
     container_name: mysql
     restart: always
     environment:
@@ -14,8 +14,9 @@ services:
     user: 1000:1000
 
   teamcity:
-    image: jetbrains/teamcity-server
+    image: jetbrains/teamcity-server:2021.1.2
     container_name: teamcity
+    restart: always
     ports:
       - "8111:8111"
     volumes:
@@ -25,8 +26,9 @@ services:
       - db
 
   nginx:
-    image: nginx
+    image: nginx:1.21
     container_name: nginx
+    restart: always
     ports:
       - "443:443"
     volumes:
