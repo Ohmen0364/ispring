@@ -7,8 +7,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: toor
       MYSQL_DATABASE: teamcity_db
-    ports:
-      - "3307:3306"
     volumes:
       - ./mysql:/var/lib/mysql
     user: 1000:1000
@@ -17,8 +15,6 @@ services:
     image: jetbrains/teamcity-server:2021.1.2
     container_name: teamcity
     restart: always
-    ports:
-      - "8111:8111"
     volumes:
       - ./tc-data:/data/teamcity_server/datadir
       - ./tc-logs:/opt/teamcity/logs
