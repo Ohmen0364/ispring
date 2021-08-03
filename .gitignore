@@ -1,2 +1,2 @@
-./data/*
+./data/**
 !./data/tc/tc-data/config/database.properties
