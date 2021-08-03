@@ -16,8 +16,8 @@ services:
     container_name: teamcity
     restart: always
     volumes:
-      - ./data/tc-data:/data/teamcity_server/datadir
-      - ./data/tc-logs:/opt/teamcity/logs
+      - ./data/tc/tc-data:/data/teamcity_server/datadir
+      - ./data/tc/tc-logs:/opt/teamcity/logs
     depends_on:
       - db
 
