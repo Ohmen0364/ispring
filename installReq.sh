@@ -7,7 +7,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 sudo systemctl disable apache2
 sudo usermod -aG docker $USER
-sudo mkdir tc-logs tc-data mysql
+sudo mkdir ./data/tc/tc-logs ./data/tc/mysql
 sudo chown -R $USER:docker ./*
 sudo cp hosts /etc/hosts
 sudo reboot

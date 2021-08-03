@@ -8,7 +8,7 @@ services:
       MYSQL_ROOT_PASSWORD: toor
       MYSQL_DATABASE: teamcity_db
     volumes:
-      - ./mysql:/var/lib/mysql
+      - ./data/mysql:/var/lib/mysql
     user: 1000:1000
 
   teamcity:
@@ -16,8 +16,8 @@ services:
     container_name: teamcity
     restart: always
     volumes:
-      - ./tc-data:/data/teamcity_server/datadir
-      - ./tc-logs:/opt/teamcity/logs
+      - ./data/tc-data:/data/teamcity_server/datadir
+      - ./data/tc-logs:/opt/teamcity/logs
     depends_on:
       - db
 
@@ -28,8 +28,8 @@ services:
     ports:
       - "443:443"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./tc.crt:/etc/nginx/tc.crt
-      - ./tc.key:/etc/nginx/tc.key
+      - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./config/nginx/tc.crt:/etc/nginx/tc.crt
+      - ./config/nginx/tc.key:/etc/nginx/tc.key
     links:
       - "teamcity:teamcity"
