@@ -8,7 +8,12 @@ installDocker (){
         sudo wget https://github.com/moparisthebest/static-curl/releases/download/v7.78.0/curl-amd64 -O /usr/bin/curl
         sudo chmod +x /usr/bin/curl
     fi
-    sudo curl -fsSL https://get.docker.com/ | sudo sh
+    if [[ -x "$(command -v docker)" ]]; then
+        echo "docker found"
+    else
+        sudo curl -fsSL https://get.docker.com/ | sudo sh
+        sudo usermod -aG docker $USER
+    fi
     if [[ -x "$(command -v docker-compose)" ]]; then
         echo "docker-compose found"
     else
@@ -17,14 +22,20 @@ installDocker (){
         sudo chmod +x /usr/local/bin/docker-compose
         sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
     fi
-    sudo usermod -aG docker $USER
 }
 
 
 if [[ -x "$(command -v docker)" ]] && [[ -x "$(command -v docker-compose)" ]]; then
     mkdir ./data/tc/tc-logs ./data/mysql
     sudo chown -R $USER:docker ./*
+    cat /etc/hosts >> .config/hosts
     sudo cp ./config/hosts /etc/hosts
+    sudo reboot
 else
     installDocker;
+    mkdir ./data/tc/tc-logs ./data/mysql
+    sudo chown -R $USER:docker ./*
+    cat /etc/hosts >> .config/hosts
+    sudo cp ./config/hosts /etc/hosts
+    sudo reboot
 fi
