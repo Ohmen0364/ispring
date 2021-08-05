@@ -9,7 +9,7 @@ services:
       MYSQL_DATABASE: teamcity_db
     volumes:
       - ./data/mysql:/var/lib/mysql
-    user: 1000:1000
+    user: "${UID}:${GID}"
 
   teamcity:
     image: jetbrains/teamcity-server:2021.1.2

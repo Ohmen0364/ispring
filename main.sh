@@ -13,7 +13,7 @@ read input
 
 case $input in 
     1)
-        docker-compose up --no-start
+        UID=${UID} GID=${GID} docker-compose up --no-start
         ;;
     2)
         docker-compose start
