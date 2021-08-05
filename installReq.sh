@@ -1,6 +1,6 @@
 #!/bin/bash
 
-installDocker (){
+installDocker(){
     if [[ -x "$(command -v curl)" ]]; then
         echo "curl found"
     else
@@ -24,18 +24,17 @@ installDocker (){
     fi
 }
 
+configureSys(){
+    mkdir ./data/tc/tc-logs ./data/mysql
+    sudo chown -R $USER:docker ./*
+    cat /etc/hosts >> ./config/hosts
+    sudo cp ./config/hosts /etc/hosts
+    sudo reboot
+}
 
 if [[ -x "$(command -v docker)" ]] && [[ -x "$(command -v docker-compose)" ]]; then
-    mkdir ./data/tc/tc-logs ./data/mysql
-    sudo chown -R $USER:docker ./*
-    cat /etc/hosts >> .config/hosts
-    sudo cp ./config/hosts /etc/hosts
-    sudo reboot
+    configureSys;
 else
     installDocker;
-    mkdir ./data/tc/tc-logs ./data/mysql
-    sudo chown -R $USER:docker ./*
-    cat /etc/hosts >> .config/hosts
-    sudo cp ./config/hosts /etc/hosts
-    sudo reboot
+    configureSys;
 fi
